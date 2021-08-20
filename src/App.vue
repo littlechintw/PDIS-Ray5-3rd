@@ -7,15 +7,18 @@
     </div> -->
 
     <router-view />
+    <Footer />
   </div>
 </template>
 
 <script>
 import Bar from "@/components/Bar.vue";
+import Footer from "@/components/Footer.vue";
 
 export default {
   components: {
     Bar,
+    Footer,
   },
 };
 </script>

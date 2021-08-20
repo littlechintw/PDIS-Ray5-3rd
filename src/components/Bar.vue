@@ -9,7 +9,13 @@
         <a style="margin-left: 20px; color: #4f4f4f; font-size: 14px"
           >常見問答</a
         >
-        <a style="margin-left: 20px; color: #4f4f4f; font-size: 14px"
+        <a
+          style="
+            margin-left: 20px;
+            color: #4f4f4f;
+            font-size: 14px;
+            color: #ea5959;
+          "
           >登入 / 註冊</a
         >
       </div>
@@ -35,7 +41,7 @@
         <div class="navbar">
           <div class="dropdown" v-for="item in nav_bar_items" :key="item">
             <button class="dropbtn">
-              {{ item.title }}
+              <a>{{ item.title }}</a>
               <i class="fa fa-caret-down"></i>
             </button>
             <div class="dropdown-content">
@@ -47,15 +53,52 @@
               >
             </div>
           </div>
+          <div style="float: right; padding-top: 37px; padding-right: 10px">
+            <v-row align="center" justify="space-around">
+              <v-btn
+                tile
+                icon
+                small
+                style="background-color: #dedede"
+                color="gray"
+              >
+                <v-icon x-small> mdi-format-size </v-icon>
+              </v-btn>
+              <div style="padding-right: 3px" />
+              <v-btn
+                tile
+                icon
+                small
+                style="background-color: #dedede"
+                color="gray"
+              >
+                <v-icon small> mdi-format-size </v-icon>
+              </v-btn>
+              <div style="padding-right: 3px" />
+              <v-btn
+                tile
+                icon
+                small
+                style="background-color: #dedede"
+                color="gray"
+              >
+                <v-icon> mdi-format-size </v-icon>
+              </v-btn>
+              <p
+                style="
+                  float: left;
+                  font-size: 16px;
+                  color: black;
+                  text-align: center;
+                  padding-top: 2px;
+                  padding-left: 10px;
+                "
+              >
+                字型
+              </p>
+            </v-row>
+          </div>
         </div>
-
-        <!-- <div class="bar_right">
-          <v-row align="center" justify="space-around">
-            <v-btn tile color="gray">
-              <v-icon left> mdi-t </v-icon>
-            </v-btn>
-          </v-row>
-        </div> -->
       </div>
     </div>
   </div>
@@ -146,8 +189,8 @@ hr.solid {
 /* Navbar container */
 .navbar {
   overflow: hidden;
-  padding-top: 15px;
   padding-left: 100px;
+  /* background-color: gray; */
 }
 
 /* Links inside the navbar */
@@ -172,7 +215,7 @@ hr.solid {
   border: none;
   outline: none;
   color: black;
-  padding: 14px 16px;
+  padding: 14px 10px;
   background-color: inherit;
   font-family: inherit; /* Important for vertical align on mobile phones */
   margin: 0; /* Important for vertical align on mobile phones */
