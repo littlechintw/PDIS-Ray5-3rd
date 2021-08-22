@@ -14,5 +14,8 @@ export default {
   components: {
     // HelloWorld
   },
+  mounted: function () {
+    location.href = "/register";
+  },
 };
 </script>
