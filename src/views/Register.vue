@@ -2,7 +2,10 @@
   <div class="frame">
     <div class="breadcrumbs">
       <a style="float: left; padding-left: 100px; padding-top: 15px"> 註冊 </a>
-      <v-breadcrumbs :items="items" style="float: right; padding-right: 100px">
+      <v-breadcrumbs
+        :items="breadcrumbsItems"
+        style="float: right; padding-right: 100px"
+      >
         <template v-slot:divider>
           <v-icon>mdi-chevron-right</v-icon>
         </template>
@@ -123,7 +126,7 @@
 <script>
 export default {
   data: () => ({
-    items: [
+    breadcrumbsItems: [
       {
         text: "首頁",
         disabled: false,
