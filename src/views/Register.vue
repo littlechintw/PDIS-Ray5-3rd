@@ -4,7 +4,7 @@
       <a style="float: left; padding-left: 100px; padding-top: 15px"> 註冊 </a>
       <v-breadcrumbs
         :items="breadcrumbsItems"
-        style="float: right; padding-right: 100px"
+        style="float: right; padding-right: 100px; transform: translateY(-2px)"
       >
         <template v-slot:divider>
           <v-icon>mdi-chevron-right</v-icon>
@@ -14,9 +14,13 @@
 
     <div style="padding-top: 60px" />
 
+    <!-- 志工聲明 -->
     <div style="padding-left: 100px; padding-right: 100px">
       <div class="statement">
         <h2>聲明</h2>
+
+        <div style="padding-top: 20px" />
+        <v-divider style="background-color: black" />
 
         <br />
 
@@ -99,7 +103,8 @@
             tile
             elevation="0"
             large
-            color="#bdbdbd"
+            color="#F17E51"
+            outlined
             dark
             style="font-size: 24px"
             >不同意</v-btn
@@ -109,7 +114,7 @@
             tile
             elevation="0"
             large
-            color="#8f8f8f"
+            color="#F98B60"
             dark
             style="font-size: 24px"
             onclick="location.href='/register/agree'"
@@ -154,12 +159,16 @@ export default {
 }
 
 .statement {
-  background-color: #c4c4c4;
-  padding-top: 30px;
-  padding-bottom: 30px;
-  padding-left: 40px;
-  padding-right: 40px;
+  background-color: #f3f3f3;
+  padding-top: 90px;
+  padding-bottom: 90px;
+  padding-left: 80px;
+  padding-right: 80px;
   line-height: 30px;
+}
+
+.statement a {
+  font-size: 14px;
 }
 
 .paragraph_1 {
