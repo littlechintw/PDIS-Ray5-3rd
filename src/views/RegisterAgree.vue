@@ -307,39 +307,60 @@
                 style="width: 40%; padding-left: 7%"
               >
                 <v-row style="padding-top: 80px">
-                  <a class="formShowTitle">中文姓名 *</a>
+                  <a class="formShowTitle">
+                    中文姓名
+                    <a class="mustFiled">*</a>
+                  </a>
                   <a class="formShowData">{{ name1 }}{{ name2 }}</a>
                 </v-row>
 
                 <v-row style="padding-top: 20px">
-                  <a class="formShowTitle">稱謂 *</a>
+                  <a class="formShowTitle">
+                    稱謂
+                    <a class="mustFiled">*</a>
+                  </a>
                   <a class="formShowData">{{ sexShow }}</a>
                 </v-row>
 
                 <v-row style="padding-top: 20px">
-                  <a class="formShowTitle">身分證字號 * / 居留證 *</a>
+                  <a class="formShowTitle">
+                    身分證字號 / 居留證
+                    <a class="mustFiled">*</a>
+                  </a>
                   <a class="formShowData">{{ personId }}</a>
                 </v-row>
 
                 <v-row style="padding-top: 20px">
-                  <a class="formShowTitle">密碼 *</a>
+                  <a class="formShowTitle">
+                    密碼
+                    <a class="mustFiled">*</a>
+                  </a>
                   <a class="formShowData">******************</a>
                 </v-row>
 
                 <v-row style="padding-top: 20px">
-                  <a class="formShowTitle">出生日期 *</a>
+                  <a class="formShowTitle">
+                    出生日期
+                    <a class="mustFiled">*</a>
+                  </a>
                   <a class="formShowData"
                     >{{ birthYear }} / {{ birthMonth }} / {{ birthDay }}</a
                   >
                 </v-row>
 
                 <v-row style="padding-top: 20px">
-                  <a class="formShowTitle">連絡電話 *</a>
+                  <a class="formShowTitle">
+                    連絡電話
+                    <a class="mustFiled">*</a>
+                  </a>
                   <a class="formShowData">{{ phone }}</a>
                 </v-row>
 
                 <v-row style="padding-top: 20px">
-                  <a class="formShowTitle">電子信箱 *</a>
+                  <a class="formShowTitle">
+                    電子信箱<a class="mustFiled">*</a>
+                  </a>
+
                   <a class="formShowData">{{ email }}</a>
                 </v-row>
 
@@ -378,7 +399,7 @@
                 ref="matchFormOpen"
                 v-model="valid"
                 lazy-validation
-                style="width: 60%"
+                style="width: 80%"
               >
                 <v-row style="padding-top: 80px">
                   <h3>
@@ -397,7 +418,7 @@
                         <v-radio-group
                           v-model="match"
                           row
-                          style="padding-left: 10vw"
+                          style="padding-left: 19vw"
                         >
                           <v-radio value="true">
                             <template v-slot:label>
@@ -541,6 +562,31 @@
 
                       <div style="padding-bottom: 60px" />
                       <v-row>
+                        <a class="formTitle">興趣活動類型</a>
+                      </v-row>
+                      <v-row style="padding-top: 0px">
+                        <v-checkbox
+                          v-model="selected"
+                          :value="interest"
+                          v-for="interest in interestList"
+                          :key="interest"
+                        >
+                          <template v-slot:label>
+                            <a
+                              style="
+                                padding-left: 10px;
+                                padding-right: 10px;
+                                font-size: 14px;
+                              "
+                            >
+                              {{ interest }}
+                            </a>
+                          </template>
+                        </v-checkbox>
+                      </v-row>
+
+                      <div style="padding-bottom: 60px" />
+                      <v-row>
                         <a class="formTitle">語言</a>
                       </v-row>
                       <v-row style="padding-top: 0px">
@@ -554,7 +600,7 @@
                             <a
                               style="
                                 padding-left: 10px;
-                                padding-right: 30px;
+                                padding-right: 10px;
                                 font-size: 14px;
                               "
                             >
@@ -586,26 +632,6 @@
                           </template>
                         </v-checkbox>
                       </v-row>
-
-                      <!-- <div style="padding-bottom: 0px" />
-                      <v-row>
-                        <a class="formTitle">興趣活動類型</a>
-                        <v-chip-group
-                          v-model="interest"
-                          column
-                          multiple
-                          style="width: 73%"
-                        >
-                          <v-chip
-                            filter
-                            outlined
-                            v-for="interest in interestList"
-                            :key="interest"
-                          >
-                            {{ interest }}
-                          </v-chip>
-                        </v-chip-group>
-                      </v-row> -->
 
                       <div style="padding-bottom: 0px" />
                       <v-row>
@@ -848,8 +874,8 @@ h1 {
 }
 
 .formFrame {
-  padding-left: 130px;
-  padding-right: 130px;
+  padding-left: 5%;
+  padding-right: 5%;
 }
 
 .editBtn {
@@ -865,7 +891,7 @@ h1 {
 }
 
 .formShowTitle {
-  width: 40%;
+  width: 50%;
   text-align: left;
   font-size: 14px;
   float: left;
@@ -875,7 +901,8 @@ h1 {
   text-align: left;
   font-size: 18px;
   font-weight: bold;
-  padding-top: 4px;
+  padding-top: 2px;
+  padding-left: 20px;
 }
 
 .mustFiled {
