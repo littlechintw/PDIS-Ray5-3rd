@@ -16,7 +16,7 @@
 
     <div class="formFrame">
       <!-- 區塊 1 基本資料 -->
-      <a class="statusTitle">註冊步驟 1：填寫基本資料</a>
+      <a class="statusTitleDone">步驟 1：填寫基本資料</a>
       <!-- 區塊 1 修改按鈕 -->
       <v-btn
         class="editBtn"
@@ -311,7 +311,7 @@
                     中文姓名
                     <a class="mustFiled">*</a>
                   </a>
-                  <a class="formShowData">{{ name1 }}{{ name2 }}</a>
+                  <a class="formShowData">{{ name1 }} {{ name2 }}</a>
                 </v-row>
 
                 <v-row style="padding-top: 20px">
@@ -374,7 +374,8 @@
       <div style="padding-top: 60px" />
 
       <!-- 區塊 2 志工媒合 -->
-      <a class="statusTitle">註冊步驟 2：志工媒合</a>
+      <a v-show="!part1Done" class="statusTitle">步驟 2：志工媒合</a>
+      <a v-show="part1Done" class="statusTitleDone">步驟 2：志工媒合</a>
       <!-- 區塊 2 修改按鈕 -->
       <v-btn
         class="editBtn"
@@ -388,10 +389,11 @@
         修改
       </v-btn>
       <div style="padding-top: 5px" />
-      <v-divider style="background-color: #ff9f79" />
+      <v-divider v-show="!part1Done" style="background-color: #c1c1c1" />
+      <v-divider v-show="part1Done" style="background-color: #ff9f79" />
 
       <!-- 區塊 2 輸入表格 -->
-      <div v-show="part1Done">
+      <div v-show="part1Done && !part2Done">
         <table width="100%">
           <tr>
             <td align="center">
@@ -450,11 +452,10 @@
                 </v-row>
 
                 <v-row>
-                  <div style="padding-top: 60px" />
+                  <div v-if="match == 'true'" style="padding-top: 60px" />
                 </v-row>
 
                 <v-row>
-                  <div style="padding-top: 200px" />
                   <div v-if="match == 'true'" class="matchForm">
                     <v-form
                       ref="matchFormOpen"
@@ -468,7 +469,7 @@
                         >
                       </v-row>
                       <v-row style="padding-top: 0px">
-                        <v-checkbox v-model="selected" value="專長">
+                        <v-checkbox v-model="notificationSelected" value="專長">
                           <template v-slot:label>
                             <a
                               style="
@@ -481,7 +482,10 @@
                             </a>
                           </template>
                         </v-checkbox>
-                        <v-checkbox v-model="selected" value="可服務時間">
+                        <v-checkbox
+                          v-model="notificationSelected"
+                          value="可服務時間"
+                        >
                           <template v-slot:label>
                             <a
                               style="
@@ -494,7 +498,10 @@
                             </a>
                           </template>
                         </v-checkbox>
-                        <v-checkbox v-model="selected" value="可服務地區">
+                        <v-checkbox
+                          v-model="notificationSelected"
+                          value="可服務地區"
+                        >
                           <template v-slot:label>
                             <a
                               style="
@@ -513,7 +520,10 @@
                         <a class="formTitle">通知方式 * ( 可多選 )</a>
                       </v-row>
                       <v-row style="padding-top: 0px">
-                        <v-checkbox v-model="selected" value="簡訊通知">
+                        <v-checkbox
+                          v-model="notificationTypeSelected"
+                          value="簡訊通知"
+                        >
                           <template v-slot:label>
                             <a
                               style="
@@ -526,7 +536,10 @@
                             </a>
                           </template>
                         </v-checkbox>
-                        <v-checkbox v-model="selected" value="電子信箱">
+                        <v-checkbox
+                          v-model="notificationTypeSelected"
+                          value="電子信箱"
+                        >
                           <template v-slot:label>
                             <a
                               style="
@@ -548,7 +561,12 @@
                         <a class="formTitle">我的專長 * ( 可多選 )</a>
                       </v-row>
                       <v-row style="padding-top: 10px">
-                        <v-chip-group v-model="expertise" column multiple>
+                        <v-chip-group
+                          active-class="black--text text--accent-4"
+                          v-model="expertiseSelected"
+                          column
+                          multiple
+                        >
                           <v-chip
                             filter
                             outlined
@@ -562,11 +580,11 @@
 
                       <div style="padding-bottom: 60px" />
                       <v-row>
-                        <a class="formTitle">興趣活動類型</a>
+                        <a class="formTitle">感興趣的活動類型 * （可多選）</a>
                       </v-row>
                       <v-row style="padding-top: 0px">
                         <v-checkbox
-                          v-model="selected"
+                          v-model="interestSelected"
                           :value="interest"
                           v-for="interest in interestList"
                           :key="interest"
@@ -587,11 +605,11 @@
 
                       <div style="padding-bottom: 60px" />
                       <v-row>
-                        <a class="formTitle">語言</a>
+                        <a class="formTitle">語言 * （可多選）</a>
                       </v-row>
                       <v-row style="padding-top: 0px">
                         <v-checkbox
-                          v-model="selected"
+                          v-model="languageSelected"
                           :value="language"
                           v-for="language in languageList"
                           :key="language"
@@ -609,7 +627,7 @@
                           </template>
                         </v-checkbox>
                         <v-checkbox
-                          v-model="selected"
+                          v-model="languageSelected"
                           value="other"
                           style="transform: translateY(-17px)"
                         >
@@ -635,48 +653,299 @@
 
                       <div style="padding-bottom: 0px" />
                       <v-row>
-                        <a class="formTitle">服務時間</a>
-                        <a class="mustFiled">*</a>
-                        <v-chip-group
-                          v-model="serveTime"
-                          column
-                          multiple
-                          style="width: 73%"
+                        <!-- <a class="formTitle">服務時間</a> -->
+                        <a class="formTitle">可服務時段 * （可多選）</a>
+                        <!-- <a class="mustFiled">*</a> -->
+                      </v-row>
+                      <v-row style="padding-top: 0px">
+                        <v-checkbox
+                          v-model="serveTimeSelected"
+                          :value="serveTime"
+                          v-for="serveTime in serveTimeList"
+                          :key="serveTime"
                         >
-                          <v-chip
-                            filter
-                            outlined
-                            v-for="serveTime in serveTimeOther"
-                            :key="serveTime"
-                          >
-                            {{ serveTimeOther }}
-                          </v-chip>
-                        </v-chip-group>
+                          <template v-slot:label>
+                            <a
+                              style="
+                                padding-left: 10px;
+                                padding-right: 10px;
+                                font-size: 14px;
+                              "
+                            >
+                              {{ serveTime }}
+                            </a>
+                          </template>
+                        </v-checkbox>
+                        <v-checkbox
+                          v-model="serveTimeSelected"
+                          value="other"
+                          style="transform: translateY(-17px)"
+                        >
+                          <template v-slot:label>
+                            <a
+                              style="
+                                padding-left: 10px;
+                                padding-right: 20px;
+                                font-size: 14px;
+                              "
+                            >
+                              其他
+                            </a>
+                            <v-text-field
+                              v-model="serveTimeSelectOther"
+                              dense
+                              single-line
+                              style="padding-top: 10px"
+                            ></v-text-field>
+                          </template>
+                        </v-checkbox>
+                      </v-row>
+
+                      <div style="padding-bottom: 0px" />
+                      <v-row>
+                        <!-- <a class="formTitle">服務時間</a> -->
+                        <a class="formTitle">可服務地區 * （可多選）</a>
+                        <!-- <a class="mustFiled">*</a> -->
+                      </v-row>
+                      <v-row style="padding-top: 0px">
+                        <v-checkbox
+                          v-model="serveAreaSelected"
+                          :value="serveArea"
+                          v-for="serveArea in serveAreaList"
+                          :key="serveArea"
+                        >
+                          <template v-slot:label>
+                            <a
+                              style="
+                                padding-left: 10px;
+                                padding-right: 10px;
+                                font-size: 14px;
+                              "
+                            >
+                              {{ serveArea }}
+                            </a>
+                          </template>
+                        </v-checkbox>
                       </v-row>
                     </v-form>
                   </div>
                 </v-row>
 
-                <div style="padding-bottom: 60px" />
+                <div v-if="match" style="padding-bottom: 60px" />
                 <table width="100%">
                   <tr>
                     <td align="center">
                       <v-btn
                         tile
                         elevation="0"
-                        large
                         color="#F17E51"
                         dark
                         outlined
                         style="font-size: 24px"
-                        onclick="location.href='/register'"
-                        >回聲明</v-btn
+                        @click="part1Edit"
+                        >上一步</v-btn
                       >
                       <a style="padding-left: 60px" />
                       <v-btn
                         tile
                         elevation="0"
-                        large
+                        color="#F98B60"
+                        dark
+                        style="font-size: 24px"
+                        @click="validate2"
+                        >確認資料</v-btn
+                      >
+                    </td>
+                  </tr>
+                </table>
+              </v-form>
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <!-- 區塊 2 預覽表格 -->
+      <div v-show="part2Done">
+        <table width="100%">
+          <tr>
+            <td align="center">
+              <v-form
+                ref="matchFormOpen"
+                v-model="valid"
+                lazy-validation
+                style="width: 80%"
+              >
+                <v-row style="padding-top: 80px">
+                  <h3>
+                    我們希望可以透過這個平台「媒合」起「有興趣擔任志工的民眾」以及「需要志工的公益活動」兩方，因此開啟媒合功能即可將愛心化為行動，讓需求機構主動聯絡您
+                  </h3>
+                </v-row>
+                <v-row style="padding-top: 60px; color: #ea5959">
+                  <h3 style="text-align: center; width: 100%">
+                    您是否有意願開啟「 媒合功能 」？ *
+                  </h3>
+                </v-row>
+                <v-row>
+                  <br />
+                </v-row>
+                <v-row>
+                  <table width="100%">
+                    <tr>
+                      <td align="center">
+                        <a class="formShowData">{{ matchShow }}</a>
+                      </td>
+                    </tr>
+                  </table>
+                </v-row>
+
+                <v-row>
+                  <div style="padding-top: 60px" />
+                </v-row>
+
+                <v-row>
+                  <!-- <div v-if="match == 'true'" style="padding-top: 200px" /> -->
+                  <div v-if="match == 'true'" class="matchForm">
+                    <v-form
+                      ref="matchFormOpen"
+                      v-model="valid"
+                      lazy-validation
+                      style="width: 95%"
+                    >
+                      <v-row style="padding-top: 20px">
+                        <a class="formShowTitle">
+                          若符合以下條件，即可寄給我活動通知
+                          <a class="mustFiled">* （可多選）</a>
+                        </a>
+                        <a class="formShowData">{{
+                          listDataShow(notificationSelected)
+                        }}</a>
+                      </v-row>
+
+                      <v-row style="padding-top: 20px">
+                        <a class="formShowTitle">
+                          通知方式
+                          <a class="mustFiled">* （可多選）</a>
+                        </a>
+                        <a class="formShowData">{{
+                          listDataShow(notificationTypeSelected)
+                        }}</a>
+                      </v-row>
+
+                      <v-row style="padding-top: 20px">
+                        <a class="formShowTitle">
+                          我的專長
+                          <a class="mustFiled">* （可多選）</a>
+                        </a>
+                        <a class="formShowData">{{
+                          listDataShowExpertise(expertiseSelected)
+                        }}</a>
+                      </v-row>
+
+                      <v-row style="padding-top: 20px">
+                        <a class="formShowTitle">
+                          感興趣的活動類型
+                          <a class="mustFiled">* （可多選）</a>
+                        </a>
+                        <a class="formShowData">{{
+                          listDataShow(interestSelected)
+                        }}</a>
+                      </v-row>
+
+                      <v-row style="padding-top: 20px">
+                        <a class="formShowTitle">
+                          語言
+                          <a class="mustFiled">* （可多選）</a>
+                        </a>
+                        <a class="formShowData">{{
+                          listDataShow(languageSelected)
+                        }}</a>
+                      </v-row>
+
+                      <v-row style="padding-top: 20px">
+                        <a class="formShowTitle">
+                          可服務時段
+                          <a class="mustFiled">* （可多選）</a>
+                        </a>
+                        <a class="formShowData">{{
+                          listDataShow(serveTimeSelected)
+                        }}</a>
+                      </v-row>
+
+                      <v-row style="padding-top: 20px">
+                        <a class="formShowTitle">
+                          可服務地區
+                          <a class="mustFiled">* （可多選）</a>
+                        </a>
+                        <a class="formShowData">{{
+                          listDataShow(serveAreaSelected)
+                        }}</a>
+                      </v-row>
+
+                      <v-row style="padding-top: 10px"> </v-row>
+                    </v-form>
+                  </div>
+                </v-row>
+              </v-form>
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <div style="padding-top: 60px" />
+
+      <!-- 區塊 3 確認資料 -->
+      <a v-show="!part1Done || !part2Done" class="statusTitle"
+        >步驟 3：確認資料</a
+      >
+      <a v-show="part1Done && part2Done" class="statusTitleDone"
+        >步驟 3：確認資料</a
+      >
+      <!-- 區塊 3 修改按鈕 -->
+      <div style="padding-top: 5px" />
+      <v-divider
+        v-show="!part1Done || !part2Done"
+        style="background-color: #c1c1c1"
+      />
+      <v-divider
+        v-show="part1Done && part2Done"
+        style="background-color: #ff9f79"
+      />
+
+      <!-- 區塊 3 內容 -->
+      <div v-show="part1Done && part2Done">
+        <table width="100%">
+          <tr>
+            <td align="center">
+              <v-form
+                ref="matchFormOpen"
+                v-model="valid"
+                lazy-validation
+                style="width: 80%"
+              >
+                <v-row style="padding-top: 80px">
+                  <h3 style="color: #4f4f4f; width: 100%">
+                    確認以上填寫資料無誤後，即可按「確認資料」來完成志工註冊！
+                  </h3>
+                </v-row>
+
+                <div v-if="match" style="padding-bottom: 60px" />
+                <table width="100%">
+                  <tr>
+                    <td align="center">
+                      <v-btn
+                        tile
+                        elevation="0"
+                        color="#F17E51"
+                        dark
+                        outlined
+                        style="font-size: 24px"
+                        @click="part2Edit"
+                        >上一步</v-btn
+                      >
+                      <a style="padding-left: 60px" />
+                      <v-btn
+                        tile
+                        elevation="0"
                         color="#F98B60"
                         dark
                         style="font-size: 24px"
@@ -735,7 +1004,10 @@ export default {
     ],
     phone: "0900123456",
     match: "true",
-    expertise: [],
+    matchShow: "",
+    notificationSelected: ["可服務時間", "專長", "可服務地區"],
+    notificationTypeSelected: ["電子信箱", "簡訊通知"],
+    expertiseSelected: [0, 7, 14],
     expertiseList: [
       "家電修理",
       "機械",
@@ -767,9 +1039,7 @@ export default {
       "駕駛",
       "特殊教育",
     ],
-    language: [],
-    languageList: ["中文", "台語", "客語", "英文", "日文", "原住民母語"],
-    interest: [],
+    interestSelected: ["社會福利", "環境保護", "觀光導覽"],
     interestList: [
       "社會福利",
       "環境保護",
@@ -789,9 +1059,38 @@ export default {
       "交通服務",
       "體育推廣",
     ],
-    serveTimeSelected: [],
-    serveTime: [],
-    serveTimeOhter: ["寒假", "暑假", "國定假日", "一日志工", "全時段皆可"],
+    languageSelected: ["中文", "台語", "英文"],
+    languageList: ["中文", "台語", "客語", "英文", "日文", "原住民母語"],
+    languageSelectOther: "",
+    serveTimeSelected: ["寒假", "暑假"],
+    serveTimeList: [
+      "平日上午",
+      "平日中午",
+      "平日下午",
+      "假日上午",
+      "假日中午",
+      "假日下午",
+      "寒假",
+      "暑假",
+    ],
+    serveTimeSelectOther: "",
+    serveAreaSelected: ["桃園區", "龜山區"],
+    serveAreaList: [
+      "中壢區",
+      "平鎮區",
+      "龍潭區",
+      "楊梅區",
+      "新屋區",
+      "觀音區",
+      "桃園區",
+      "龜山區",
+      "八德區",
+      "大溪區",
+      "復興區",
+      "大園區",
+      "蘆竹區",
+    ],
+    serveAreaSelectOther: "",
   }),
   methods: {
     validate() {
@@ -823,6 +1122,26 @@ export default {
         this.part1Done = true;
       }
     },
+    validate2() {
+      if (
+        this.notificationSelected.length === 0 ||
+        this.notificationTypeSelected === 0 ||
+        this.expertiseSelected === 0 ||
+        this.interestSelected === 0 ||
+        this.languageSelected === 0 ||
+        this.serveTimeSelected === 0 ||
+        this.serveAreaSelected === 0
+      ) {
+        alert("還有內容還沒完成！");
+      } else {
+        if (this.match == "true") {
+          this.matchShow = "是，我有意願";
+        } else {
+          this.matchShow = "否，我沒有意願";
+        }
+        this.part2Done = true;
+      }
+    },
     part1Edit() {
       this.part1Done = false;
       this.part2Done = false;
@@ -830,6 +1149,22 @@ export default {
     part2Edit() {
       this.part1Done = true;
       this.part2Done = false;
+    },
+    listDataShow(dataList) {
+      var output = "";
+      for (let i = 0; i < dataList.length - 1; i++) {
+        output += dataList[i] + ", ";
+      }
+      output += dataList[dataList.length - 1];
+      return output;
+    },
+    listDataShowExpertise(dataList) {
+      var output = "";
+      for (let i = 0; i < dataList.length - 1; i++) {
+        output += this.expertiseList[dataList[i]] + ", ";
+      }
+      output += this.expertiseList[dataList[dataList.length - 1]];
+      return output;
     },
   },
 };
@@ -860,6 +1195,13 @@ h1 {
 }
 
 .statusTitle {
+  text-align: left;
+  font-size: 36px;
+  color: #000;
+  font-weight: bold;
+}
+
+.statusTitleDone {
   text-align: left;
   font-size: 36px;
   color: #f17e51;
@@ -901,7 +1243,6 @@ h1 {
   text-align: left;
   font-size: 18px;
   font-weight: bold;
-  padding-top: 2px;
   padding-left: 20px;
 }
 
@@ -921,86 +1262,5 @@ h1 {
   padding-bottom: 80px;
   padding-left: 15%;
   padding-right: 15%;
-}
-
-.timeSelectTable_Top_Left {
-  width: 50px;
-  height: 30px;
-  border-top: 2px solid #000000;
-  border-bottom: 1px solid #000000;
-  border-left: 2px solid #000000;
-  border-right: 1px solid #000000;
-}
-
-.timeSelectTable_Top_Center {
-  width: 45px;
-  height: 30px;
-  border-top: 2px solid #000000;
-  border-bottom: 1px solid #000000;
-  border-left: 1px solid #000000;
-  border-right: 1px solid #000000;
-}
-
-.timeSelectTable_Top_Right {
-  width: 45px;
-  height: 30px;
-  border-top: 2px solid #000000;
-  border-bottom: 1px solid #000000;
-  border-left: 1px solid #000000;
-  border-right: 2px solid #000000;
-}
-
-.timeSelectTable_Center_Left {
-  width: 50px;
-  height: 30px;
-  border-top: 1px solid #000000;
-  border-bottom: 1px solid #000000;
-  border-left: 2px solid #000000;
-  border-right: 1px solid #000000;
-}
-
-.timeSelectTable_Center_Center {
-  width: 45px;
-  height: 30px;
-  border-top: 1px solid #000000;
-  border-bottom: 1px solid #000000;
-  border-left: 1px solid #000000;
-  border-right: 1px solid #000000;
-}
-
-.timeSelectTable_Center_Right {
-  width: 45px;
-  height: 30px;
-  border-top: 1px solid #000000;
-  border-bottom: 1px solid #000000;
-  border-left: 1px solid #000000;
-  border-right: 2px solid #000000;
-}
-
-.timeSelectTable_Bottom_Left {
-  width: 50px;
-  height: 30px;
-  border-top: 1px solid #000000;
-  border-bottom: 2px solid #000000;
-  border-left: 2px solid #000000;
-  border-right: 1px solid #000000;
-}
-
-.timeSelectTable_Bottom_Center {
-  width: 45px;
-  height: 30px;
-  border-top: 1px solid #000000;
-  border-bottom: 2px solid #000000;
-  border-left: 1px solid #000000;
-  border-right: 1px solid #000000;
-}
-
-.timeSelectTable_Bottom_Right {
-  width: 45px;
-  height: 30px;
-  border-top: 1px solid #000000;
-  border-bottom: 2px solid #000000;
-  border-left: 1px solid #000000;
-  border-right: 2px solid #000000;
 }
 </style>
