@@ -1,10 +1,10 @@
 <template>
   <div class="frame">
     <div class="breadcrumbs">
-      <a style="float: left; padding-left: 100px; padding-top: 15px"> 註冊 </a>
+      <h3 style="float: left; padding-left: 20px; padding-top: 15px">註冊</h3>
       <v-breadcrumbs
         :items="breadcrumbsItems"
-        style="float: right; padding-right: 100px; transform: translateY(-2px)"
+        style="float: right; padding-right: 20px; transform: translateY(-2px)"
       >
         <template v-slot:divider>
           <v-icon>mdi-chevron-right</v-icon>
@@ -154,8 +154,8 @@ export default {
 }
 
 .breadcrumbs {
-  background-color: #f5f5f5;
   height: 50px;
+  border-bottom: 3px solid #c1c1c1;
 }
 
 .statement {

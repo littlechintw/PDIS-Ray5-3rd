@@ -20,6 +20,11 @@ const routes = [
     name: 'RegisterAgree',
     component: () => import('../views/RegisterAgree.vue')
   },
+  {
+    path: '/register/done',
+    name: 'RegisterDone',
+    component: () => import('../views/RegisterDone.vue')
+  },
 ]
 
 const router = new VueRouter({

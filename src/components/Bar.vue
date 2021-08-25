@@ -30,6 +30,7 @@
           width="280px"
           src="../assets/img/logo.png"
           style="float: left"
+          onclick="location.href = '/'"
         />
 
         <!-- <div class="bar_with_logo">

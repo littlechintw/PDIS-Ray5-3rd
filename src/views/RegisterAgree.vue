@@ -1,10 +1,10 @@
 <template>
   <div class="frame">
     <div class="breadcrumbs">
-      <a style="float: left; padding-left: 100px; padding-top: 15px"> 註冊 </a>
+      <h3 style="float: left; padding-left: 20px; padding-top: 15px">註冊</h3>
       <v-breadcrumbs
         :items="breadcrumbsItems"
-        style="float: right; padding-right: 100px; transform: translateY(-2px)"
+        style="float: right; padding-right: 20px; transform: translateY(-2px)"
       >
         <template v-slot:divider>
           <v-icon>mdi-chevron-right</v-icon>
@@ -56,7 +56,7 @@
                   <v-text-field
                     v-model="name1"
                     :rules="[(v) => !!v || '必填選項']"
-                    label="姓"
+                    label="請輸入中文姓氏"
                     single-line
                     outlined
                     dense
@@ -67,7 +67,7 @@
                   <v-text-field
                     v-model="name2"
                     :rules="[(v) => !!v || '必填選項']"
-                    label="名"
+                    label="請輸入中文名字"
                     single-line
                     outlined
                     dense
@@ -140,7 +140,7 @@
                   <v-text-field
                     v-model="passwd"
                     :rules="[(v) => !!v || '必填選項']"
-                    label="請輸入密碼"
+                    label="密碼含英文大小寫，最少８字"
                     single-line
                     outlined
                     dense
@@ -236,7 +236,7 @@
                   <v-text-field
                     v-model="phone"
                     :rules="[(v) => !!v || '必填選項']"
-                    label="連絡電話"
+                    label="請輸入連絡電話"
                     single-line
                     outlined
                     dense
@@ -252,7 +252,7 @@
                   <v-text-field
                     v-model="email"
                     :rules="emailRules"
-                    label="電子信箱"
+                    label="請輸入電子信箱"
                     single-line
                     outlined
                     dense
@@ -949,7 +949,7 @@
                         color="#F98B60"
                         dark
                         style="font-size: 24px"
-                        @click="validate2"
+                        onclick="location.href='/register/done'"
                         >確認資料</v-btn
                       >
                     </td>
@@ -1181,8 +1181,8 @@ h1 {
 }
 
 .breadcrumbs {
-  background-color: #f5f5f5;
   height: 50px;
+  border-bottom: 3px solid #c1c1c1;
 }
 
 .statement {
