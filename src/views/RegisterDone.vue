@@ -42,6 +42,14 @@
           <v-btn tile elevation="0" color="#F98B60" dark style="font-size: 24px"
             >回報名頁面</v-btn
           >
+
+          <div style="padding-top: 40px" />
+
+          <v-img
+            height="454px"
+            width="727px"
+            src="../assets/img/registerDone.png"
+          />
         </td>
       </tr>
     </table>
