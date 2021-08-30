@@ -60,30 +60,38 @@
                 tile
                 icon
                 small
-                style="background-color: #dedede"
+                style="
+                  background-color: white;
+                  border: 2px #dedede solid;
+                  padding-top: 3px;
+                "
                 color="gray"
               >
-                <v-icon x-small> mdi-format-size </v-icon>
+                <v-icon x-small> mdi-format-color-text </v-icon>
               </v-btn>
               <div style="padding-right: 3px" />
               <v-btn
                 tile
                 icon
                 small
-                style="background-color: #dedede"
+                style="background-color: #dedede; padding-top: 3px"
                 color="gray"
               >
-                <v-icon small> mdi-format-size </v-icon>
+                <v-icon small> mdi-format-color-text </v-icon>
               </v-btn>
               <div style="padding-right: 3px" />
               <v-btn
                 tile
                 icon
                 small
-                style="background-color: #dedede"
+                style="
+                  background-color: white;
+                  border: 2px #dedede solid;
+                  padding-top: 3px;
+                "
                 color="gray"
               >
-                <v-icon> mdi-format-size </v-icon>
+                <v-icon> mdi-format-color-text </v-icon>
               </v-btn>
               <p
                 style="

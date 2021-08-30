@@ -100,6 +100,7 @@
       <tr>
         <td align="center">
           <v-btn
+            class="btn"
             tile
             elevation="0"
             large
@@ -111,6 +112,7 @@
           >
           <a style="padding-left: 60px" />
           <v-btn
+            class="btn"
             tile
             elevation="0"
             large
@@ -177,5 +179,9 @@ export default {
 
 .paragraph_2 {
   padding-left: 60px;
+}
+
+.btn {
+  border-radius: 4px;
 }
 </style>

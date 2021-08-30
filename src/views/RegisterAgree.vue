@@ -265,6 +265,7 @@
                   <tr>
                     <td align="center">
                       <v-btn
+                        class="btn"
                         tile
                         elevation="0"
                         large
@@ -277,6 +278,7 @@
                       >
                       <a style="padding-left: 60px" />
                       <v-btn
+                        class="btn"
                         tile
                         elevation="0"
                         large
@@ -736,6 +738,7 @@
                   <tr>
                     <td align="center">
                       <v-btn
+                        class="btn"
                         tile
                         elevation="0"
                         color="#F17E51"
@@ -747,6 +750,7 @@
                       >
                       <a style="padding-left: 60px" />
                       <v-btn
+                        class="btn"
                         tile
                         elevation="0"
                         color="#F98B60"
@@ -933,6 +937,7 @@
                   <tr>
                     <td align="center">
                       <v-btn
+                        class="btn"
                         tile
                         elevation="0"
                         color="#F17E51"
@@ -944,6 +949,7 @@
                       >
                       <a style="padding-left: 60px" />
                       <v-btn
+                        class="btn"
                         tile
                         elevation="0"
                         color="#F98B60"
@@ -1262,5 +1268,9 @@ h1 {
   padding-bottom: 80px;
   padding-left: 15%;
   padding-right: 15%;
+}
+
+.btn {
+  border-radius: 4px;
 }
 </style>

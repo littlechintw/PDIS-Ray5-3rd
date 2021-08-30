@@ -1,60 +1,71 @@
 <template>
-  <div class="frame">
-    <div class="breadcrumbs">
-      <h3 style="float: left; padding-left: 20px; padding-top: 15px">註冊</h3>
-      <v-breadcrumbs
-        :items="breadcrumbsItems"
-        style="float: right; padding-right: 20px; transform: translateY(-2px)"
-      >
-        <template v-slot:divider>
-          <v-icon>mdi-chevron-right</v-icon>
-        </template>
-      </v-breadcrumbs>
+  <div>
+    <div class="frame">
+      <div class="breadcrumbs">
+        <h3 style="float: left; padding-left: 20px; padding-top: 15px">註冊</h3>
+        <v-breadcrumbs
+          :items="breadcrumbsItems"
+          style="float: right; padding-right: 20px; transform: translateY(-2px)"
+        >
+          <template v-slot:divider>
+            <v-icon>mdi-chevron-right</v-icon>
+          </template>
+        </v-breadcrumbs>
+      </div>
+
+      <div style="padding-top: 60px" />
+
+      <table width="100%">
+        <tr>
+          <td align="center">
+            <h1 style="width: 100%">註冊成功，謝謝你成為志工的一份子！</h1>
+            <div style="padding-top: 60px" />
+            <v-btn
+              class="btn"
+              tile
+              elevation="0"
+              color="#F17E51"
+              dark
+              outlined
+              style="font-size: 24px"
+              onclick="location.href='/'"
+              >回首頁</v-btn
+            >
+            <a style="padding-left: 10px" />
+            <v-btn
+              class="btn"
+              tile
+              elevation="0"
+              color="#F17E51"
+              dark
+              outlined
+              style="font-size: 24px"
+              >常見問答</v-btn
+            ><a style="padding-left: 10px" />
+            <v-btn
+              class="btn"
+              tile
+              elevation="0"
+              color="#F98B60"
+              dark
+              style="font-size: 24px"
+              >回報名頁面</v-btn
+            >
+
+            <div style="padding-top: 40px" />
+
+            <v-img
+              height="454px"
+              width="727px"
+              src="../assets/img/registerDone.png"
+            />
+          </td>
+        </tr>
+      </table>
+
+      <div style="padding-top: 60px" />
     </div>
-
-    <div style="padding-top: 60px" />
-
-    <table width="100%">
-      <tr>
-        <td align="center">
-          <h1 style="width: 100%">註冊成功，謝謝你成為志工的一份子！</h1>
-          <div style="padding-top: 60px" />
-          <v-btn
-            tile
-            elevation="0"
-            color="#F17E51"
-            dark
-            outlined
-            style="font-size: 24px"
-            onclick="location.href='/'"
-            >回首頁</v-btn
-          >
-          <a style="padding-left: 10px" />
-          <v-btn
-            tile
-            elevation="0"
-            color="#F17E51"
-            dark
-            outlined
-            style="font-size: 24px"
-            >常見問答</v-btn
-          ><a style="padding-left: 10px" />
-          <v-btn tile elevation="0" color="#F98B60" dark style="font-size: 24px"
-            >回報名頁面</v-btn
-          >
-
-          <div style="padding-top: 40px" />
-
-          <v-img
-            height="454px"
-            width="727px"
-            src="../assets/img/registerDone.png"
-          />
-        </td>
-      </tr>
-    </table>
-
-    <div style="padding-top: 60px" />
+    <v-img src="../assets/img/registerDoneCover.png" />
   </div>
 </template>
 
@@ -170,5 +181,9 @@ h1 {
   padding-bottom: 80px;
   padding-left: 15%;
   padding-right: 15%;
+}
+
+.btn {
+  border-radius: 4px;
 }
 </style>
