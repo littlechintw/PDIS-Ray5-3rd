@@ -348,6 +348,7 @@
                   <a class="formShowData"
                     >{{ birthYear }} / {{ birthMonth }} / {{ birthDay }}</a
                   >
+                  <h3>{{ birthdayPicker }}</h3>
                 </v-row>
 
                 <v-row style="padding-top: 20px">
@@ -733,7 +734,7 @@
                   </div>
                 </v-row>
 
-                <div v-if="match" style="padding-bottom: 60px" />
+                <div style="padding-bottom: 60px" />
                 <table width="100%">
                   <tr>
                     <td align="center">
@@ -1003,6 +1004,7 @@ export default {
     birthYear: "1995",
     birthMonth: "7",
     birthDay: "1",
+    birthdayPicker: "",
     email: "ray5@pdis.gov.tw",
     emailRules: [
       (v) => !!v || "必填選項",
