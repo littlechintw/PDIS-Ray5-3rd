@@ -21,6 +21,11 @@ const routes = [
     component: () => import('../views/RegisterAgree.vue')
   },
   {
+    path: '/register/agree/n',
+    name: 'RegisterAgree',
+    component: () => import('../views/RegisterAgreeNotFilled.vue')
+  },
+  {
     path: '/register/done',
     name: 'RegisterDone',
     component: () => import('../views/RegisterDone.vue')
